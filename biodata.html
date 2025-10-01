@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Biodata Aku</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background: linear-gradient(to right, #000000, #2c2c2c);
+      color: #f5f5f5;
+      /* KOREKSI: PENTING agar mengisi 1 layar HP dan terpusat */
+      min-height: 100vh;
+      display: flex; 
+      flex-direction: column;
+      justify-content: center; /* Memusatkan Vertikal */
+      align-items: center; /* Memusatkan Horizontal */
+    }
+
+    /* Animasi loading (Tidak diubah) */
+    #loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 1s ease;
+    }
+    .loader-text {
+      font-size: 28px;
+      color: #ff3333;
+      text-shadow: 0 0 15px rgba(255,50,50,0.8);
+      animation: blink 1.5s infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    /* Konten biodata */
+    .container {
+      /* KOREKSI: Membuat kontainer lebih besar dan proporsional di HP */
+      max-width: 90%; 
+      width: 90vw;    /* Mengambil 90% lebar layar (ViewPort Width) */
+      
+      margin: auto; 
+      background: #1a1a1a;
+      padding: 25px; /* Sedikit perbesar padding agar tidak terlalu mepet */
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(255,0,0,0.3);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1s ease, transform 1s ease;
+      box-sizing: border-box; 
+    }
+    .container.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    h1 {
+      text-align: center;
+      color: #ff3333;
+      text-shadow: 0 0 10px rgba(255,50,50,0.7);
+      /* KOREKSI: Perbesar font judul */
+      font-size: 1.8em; 
+      margin-top: 5px; 
+      margin-bottom: 10px;
+    }
+
+    .photo {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+    .photo img {
+      /* KOREKSI: Perbesar ukuran foto profil */
+      width: 150px; 
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #ff3333;
+      box-shadow: 0 0 15px rgba(255,50,50,0.7);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 5px;
+    }
+    td {
+      /* KOREKSI UTAMA: Mengurangi padding vertikal (membuat tidak panjang ke bawah) */
+      padding: 8px 10px; /* 8px atas/bawah, 10px kiri/kanan */
+      font-size: 1.05em; /* Sedikit perbesar teks konten */
+      border-bottom: 2px solid #ff3333;
+      box-shadow: 0 0 5px #ff3333;
+      animation: glow 2s infinite alternate;
+      line-height: 1.3; 
+    }
+    td:first-child {
+      font-weight: bold;
+      /* KOREKSI: Mengatur lebar kolom label agar tidak terlalu lebar */
+      width: 35%; 
+      color: #ff4d4d;
+    }
+
+    /* Efek nyala-nyala (Tidak diubah) */
+    @keyframes glow {
+      from {
+        box-shadow: 0 0 5px #ff3333, 0 0 10px #ff3333;
+        border-color: #ff3333;
+      }
+      to {
+        box-shadow: 0 0 15px #ff0000, 0 0 30px #ff0000;
+        border-color: #ff0000;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="loader">
+    <div class="loader-text">Loading...</div>
+  </div>
+
+  <div class="container" id="content">
+    <h1>Biodata Aku</h1>
+    <div class="photo">
+      <img src="Tan.jpg" alt="Foto Aku">
+    </div>
+    <table>
+      <tr>
+        <td>Nama</td>
+        <td>Muhammad Tanwir</td>
+      </tr>
+      <tr>
+        <td>Tempat, Tanggal Lahir</td>
+        <td>Alue, 27 November 2006</td>
+      </tr>
+      <tr>
+        <td>Alamat</td>
+        <td>Blang Jruen</td>
+      </tr>
+      <tr>
+        <td>Hobi</td>
+        <td>Explore Game</td>
+      </tr>
+      <tr>
+        <td>Study</td>
+        <td>Politeknik Negeri Lhokseumawe</td>
+      </tr>
+    </table>
+  </div>
+
+  <script>
+    // Loading hilang lalu biodata muncul
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        document.getElementById("loader").style.opacity = "0";
+        setTimeout(() => {
+          document.getElementById("loader").style.display = "none";
+          document.getElementById("content").classList.add("show");
+        }, 1000);
+      }, 2000);
+    });
+  </script>
+</body>
+</html>
