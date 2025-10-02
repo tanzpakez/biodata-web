@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Biodata Aku - Neon Transparent Glitch Aesthetic</title>
+  <style>
+    /* ===================================================
+       GLOBAL & BACKGROUND
+       =================================================== */
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background: url('backtann.jpg') no-repeat center center fixed; 
+      background-size: cover; 
+      background-attachment: fixed; 
+      color: #f5f5f5;
+      min-height: 100vh;
+      display: flex; 
+      flex-direction: column;
+      justify-content: center; 
+      align-items: center; 
+      overflow-x: hidden; 
+    }
+
+    /* ===================================================
+       AESTHETIC OVERLAYS 
+       =================================================== */
+
+    /* EFEK SCANLINE (Garis CRT) */
+    .scanline::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        background: repeating-linear-gradient(
+            transparent 0,
+            rgba(0, 0, 0, 0.2) 1px,
+            transparent 2px
+        );
+        z-index: 99; 
+        opacity: 0.7; 
+    }
+    
+    /* GRID OVERLAY */
+    .grid-overlay::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        background: linear-gradient(to right, rgba(51, 255, 51, 0.05) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(51, 255, 51, 0.05) 1px, transparent 1px);
+        background-size: 100px 100px;
+        z-index: 5; 
+    }
+
+    /* DATA STREAM/PSEUDO-CODE */
+    .data-stream::before,
+    .data-stream::after {
+        content: "INIT: BIODATA_0x45\A STATUS: ONLINE\A USER: TANWIR\A SCAN_FREQ: 2.0s\A >_";
+        white-space: pre; 
+        position: fixed;
+        font-family: 'Courier New', monospace;
+        font-size: 10px;
+        line-height: 1.3;
+        color: rgba(51, 255, 51, 0.4); 
+        opacity: 0.8;
+        z-index: 10;
+    }
+    .data-stream::before {
+        top: 20px;
+        left: 20px;
+    }
+    .data-stream::after {
+        bottom: 20px;
+        right: 20px;
+        animation: move-data 10s linear infinite alternate;
+    }
+    @keyframes move-data {
+        from { transform: translateY(0); }
+        to { transform: translateY(-5px); }
+    }
+
+
+    /* ===================================================
+       KEYFRAMES ANIMASI
+       =================================================== */
+    
+    /* NEW: Flicker Pelan (Digunakan untuk teks) */
+    @keyframes slow-flicker {
+        0%, 18%, 22%, 25%, 53%, 57%, 100% {
+            opacity: 1;
+        }
+        20%, 55% {
+            opacity: 0.7; /* Sedikit redup */
+        }
+        23% {
+            opacity: 0.4; /* Redup kuat sebentar */
+        }
+    }
+    
+    /* Glitch Cepat saat konten muncul (entrance) */
+    @keyframes fastGlitch {
+        0% { transform: translate(1px, -1px); opacity: 0.8; }
+        20% { transform: translate(-1px, 2px); opacity: 0.9; }
+        40% { transform: translate(2px, 1px); opacity: 0.7; }
+        60% { transform: translate(-2px, -1px); opacity: 1; }
+        80% { transform: translate(1px, 0px); opacity: 0.6; }
+        100% { transform: translate(0, 0); opacity: 1; }
+    }
+
+    /* Efek Nyala-nyala Neon pada Garis Tabel (tetap dipakai untuk garis) */
+    @keyframes glow {
+      from {
+        box-shadow: 0 0 5px #33ff33, 0 0 10px #33ff33;
+        border-color: #33ff33;
+      }
+      to {
+        box-shadow: 0 0 15px #00ff00, 0 0 30px #00ff00;
+        border-color: #00ff00;
+      }
+    }
+
+
+    /* ===================================================
+       KONTEN BIODATA UTAMA
+       =================================================== */
+
+    .container {
+      max-width: 90%; 
+      width: 90vw;    
+      margin: auto; 
+      background: rgba(26, 26, 26, 0.85); 
+      padding: 25px; 
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(0,255,0,0.3);
+      box-sizing: border-box; 
+      
+      /* Garis tepi neon ganda */
+      border: 1px solid rgba(51, 255, 51, 0.5); 
+      position: relative; 
+
+      /* Animasi Glitch saat muncul */
+      animation: fastGlitch 0.2s 3 forwards; 
+      z-index: 20; 
+    }
+
+    /* Garis Tepi Kedua (Lebih Nyala) */
+    .container::after {
+        content: '';
+        position: absolute;
+        top: -5px;
+        left: -5px;
+        right: -5px;
+        bottom: -5px;
+        border: 1px solid #33ff33;
+        z-index: -1; 
+        box-shadow: 0 0 20px rgba(51, 255, 51, 0.8);
+        pointer-events: none;
+        border-radius: 20px; 
+    }
+
+    h1 {
+      text-align: center;
+      color: #33ff33; 
+      font-size: 1.8em; 
+      margin-top: 5px; 
+      margin-bottom: 10px;
+      
+      /* NEW: Terapkan Flicker Pelan */
+      animation: slow-flicker 5s infinite; /* Dibuat 5 detik agar sangat pelan */
+    }
+
+    .photo {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+    .photo img {
+      width: 150px; 
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #33ff33; 
+      box-shadow: 0 0 15px rgba(50,255,50,0.7);
+      position: relative; 
+    }
+    /* Efek Vignette/Rusak pada Foto */
+    .photo img::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.7); 
+        pointer-events: none;
+        mix-blend-mode: multiply; 
+    }
+
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 5px;
+    }
+    td {
+      padding: 8px 10px; 
+      font-size: 1.05em; 
+      border-bottom: 2px solid #33ff33; 
+      
+      /* Glow untuk garis border */
+      animation: glow 2s infinite alternate;
+
+      /* Tambahkan kedip pelan pada teks di dalam tabel */
+      animation: glow 2s infinite alternate, slow-flicker 5s infinite; 
+
+      line-height: 1.3; 
+      background: transparent; 
+      /* Penting untuk memastikan teks bisa berkedip tanpa mengganggu garis */
+      position: relative; 
+    }
+    td:first-child {
+      font-weight: bold;
+      width: 35%; 
+      color: #4dff4d; 
+    }
+  </style>
+</head>
+<body class="scanline data-stream grid-overlay">
+  <div class="container" id="content">
+    <h1>Biodata Aku</h1>
+    <div class="photo">
+      <img src="Tan.jpg" alt="Foto Aku">
+    </div>
+    <table>
+      <tr>
+        <td>Nama</td>
+        <td>Muhammad Tanwir</td>
+      </tr>
+      <tr>
+        <td>Tempat, Tanggal Lahir</td>
+        <td>Alue, 27 November 2006</td>
+      </tr>
+      <tr>
+        <td>Alamat</td>
+        <td>Blang Jruen</td>
+      </tr>
+      <tr>
+        <td>Hobi</td>
+        <td>Explore Game</td>
+      </tr>
+      <tr>
+        <td>Study</td>
+        <td>Politeknik Negeri Lhokseumawe</td>
+      </tr>
+    </table>
+  </div>
+</body>
+</html>
